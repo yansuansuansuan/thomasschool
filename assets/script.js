@@ -23,7 +23,7 @@
   const toast = document.getElementById('toast');
   let toastTimer;
   if (copyBtn && toast) copyBtn.addEventListener('click', async () => {
-    const address = '武汉市汉阳区王家湾人信汇二期一号门旁';
+    const address = document.getElementById('school-address')?.textContent.trim() || '武汉市汉阳区龙兴西街人信汇F地块二期7幢1—2层6商号（人信汇二期一号门旁）';
     try {
       if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(address);
       else {

@@ -343,3 +343,76 @@ h3 { font-size: var(--font-card); font-weight: 730; line-height: 1.5; }
   .gallery-grid figure.wide { grid-column:auto; }
   .gallery-grid img, .photo-duo img { height:auto; }
 }
+
+
+/* Campus resource articles: readable static text, local navigation and timetable. */
+.article-width { max-width: 880px; }
+.article-masthead { padding: 64px 0; background: var(--neutral); border-bottom: 1px solid var(--line); }
+.article-masthead h1 { max-width: 960px; font-size: clamp(2rem, 3.5vw, 3.25rem); line-height: 1.35; letter-spacing: -.025em; color: var(--green-dark); text-wrap: balance; }
+.article-summary { max-width: 840px; margin-top: 24px; color: var(--text-secondary); font-size: 1.125rem; line-height: 1.9; }
+.article-meta { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 24px; color: var(--text-secondary); font-size: .875rem; }
+.article-body { padding-top: 48px; padding-bottom: 64px; }
+.article-toc { padding: 24px 32px; border: 1px solid var(--line); border-radius: 12px; background: var(--neutral); }
+.article-toc strong { color: var(--green-dark); }
+.article-toc ol { margin: 12px 0 0; padding-left: 24px; }
+.article-toc li + li { margin-top: 8px; }
+.article-toc a, .article-body p a { color: var(--green); text-decoration: underline; text-underline-offset: 4px; }
+.article-section { margin-top: 48px; scroll-margin-top: 112px; }
+.article-section h2 { margin-bottom: 20px; font-size: clamp(1.4rem, 2vw, 1.875rem); line-height: 1.5; }
+.article-section p { line-height: 2; margin-top: 16px; overflow-wrap: anywhere; }
+.article-section ul { margin: 20px 0; padding-left: 24px; line-height: 2; }
+.article-section li + li { margin-top: 8px; }
+.article-section .article-note, .article-note { font-size: .875rem; color: var(--text-secondary); line-height: 1.85; }
+.article-question { padding-top: 24px; }
+.article-question h2 { font-size: 1.25rem; }
+.article-source { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--text-secondary); font-size: .875rem; line-height: 1.85; }
+.article-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.article-tags span { padding: 4px 12px; background: var(--neutral); border-radius: 6px; color: var(--green); }
+.campus-article-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.campus-article-card { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; min-width: 0; padding: 32px; border: 1px solid var(--line); border-radius: 16px; background: var(--white); }
+.campus-article-card:hover { border-color: var(--green); }
+.campus-article-card h3 { color: var(--green-dark); font-size: 1.3rem; line-height: 1.6; }
+.campus-article-card p { color: var(--text-secondary); font-size: .9375rem; line-height: 1.9; }
+.article-category { color: var(--green); font-size: .8125rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; background: var(--neutral); }
+.article-card-bottom { margin-top: auto; padding-top: 16px; display: flex; flex-wrap: wrap; width: 100%; gap: 8px; justify-content: space-between; color: var(--text-secondary); font-size: .8125rem; }
+.article-card-bottom > span { color: var(--green); font-weight: 700; }
+.article-index-bar { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+.article-index-bar > span { color: var(--text-secondary); font-size: .875rem; }
+.article-directory-hero { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; }
+.article-directory-hero h1 { font-size: clamp(2rem, 3.5vw, 3rem); }
+.article-campus-photo { margin: 0; }
+.article-campus-photo img { width: 100%; height: auto; display: block; border-radius: 16px; }
+.article-campus-photo figcaption { margin-top: 10px; color: var(--text-secondary); font-size: .8125rem; }
+.campus-service-facts { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 24px; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--line); }
+.campus-service-facts a { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.campus-service-facts strong { color: var(--green-dark); font-size: 1.125rem; }
+.campus-service-facts span { color: var(--text-secondary); font-size: .875rem; line-height: 1.85; }
+.timetable-scroll { max-width: 100%; overflow-x: auto; margin: 24px 0; border: 1px solid var(--line); border-radius: 12px; }
+.campus-timetable { width: 100%; min-width: 700px; border-collapse: collapse; font-size: .9rem; text-align: center; }
+.campus-timetable caption { padding: 16px; color: var(--green-dark); font-weight: 700; text-align: left; }
+.campus-timetable th, .campus-timetable td { padding: 14px 12px; border-top: 1px solid var(--line); border-right: 1px solid var(--line); }
+.campus-timetable tr > :last-child { border-right: 0; }
+.campus-timetable thead, .campus-timetable tbody th { background: var(--neutral); color: var(--green-dark); white-space: nowrap; }
+.campus-timetable tbody tr:nth-child(even) td { background: #fafbf9; }
+.teacher-text-list, .campus-facts { margin: 24px 0; }
+.teacher-text-list > div, .campus-facts > div { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.teacher-text-list dt, .campus-facts dt { font-weight: 700; color: var(--green-dark); }
+.teacher-text-list dd, .campus-facts dd { margin: 0; line-height: 1.9; overflow-wrap: anywhere; }
+.footer-entity { color: var(--text-secondary); font-size: .8125rem; padding: 0 0 16px; }
+.footer-discovery { display: flex; flex-wrap: wrap; gap: 12px 24px; padding-bottom: 24px; color: var(--text-secondary); font-size: .8125rem; }
+@media (max-width: 1100px) and (min-width: 980px) { .desktop-nav { gap: 16px; } .header-cta { padding-left: 16px; padding-right: 16px; } }
+@media (max-width: 979px) { .campus-article-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } .article-directory-hero { gap: 24px; } }
+@media (max-width: 680px) {
+  .article-masthead { padding: 40px 0 48px; }
+  .article-directory-hero { grid-template-columns: 1fr; gap: 32px; }
+  .campus-service-facts { grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
+  .article-summary { font-size: 1rem; }
+  .article-body { padding-top: 32px; }
+  .article-toc { padding: 20px; }
+  .article-section { margin-top: 36px; }
+  .campus-article-grid { grid-template-columns: 1fr; gap: 16px; }
+  .campus-article-card { padding: 24px; }
+  .teacher-text-list > div, .campus-facts > div { grid-template-columns: 1fr; gap: 4px; }
+  .footer-discovery { padding-bottom: 100px; }
+  .footer-bottom { padding-bottom: 16px; }
+}
