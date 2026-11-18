@@ -39,3 +39,33 @@
     toastTimer = setTimeout(() => toast.classList.remove('shown'), 2600);
   });
 })();
+
+(() => {
+ const form=document.querySelector('.article-search-form');
+ const input=document.getElementById('article-query');
+ const container=document.getElementById('article-results');
+ if(!form||!input||!container)return;
+ const cards=[...container.querySelectorAll('.campus-article-card')];
+ const filters=[...document.querySelectorAll('[data-article-filter]')];
+ const status=document.getElementById('article-result-count');
+ const empty=document.getElementById('article-empty');
+ let category='all';
+ function update(){
+   const query=input.value.trim().toLocaleLowerCase('zh-CN');
+   let count=0;
+   for(const card of cards){
+     const subjects=(card.dataset.subjects||'campus').split(' ');
+     const text=(card.innerText+' '+(card.dataset.keywords||'')).toLocaleLowerCase('zh-CN');
+     const visible=(category==='all'||subjects.includes(category))&&(!query||text.includes(query));
+     card.hidden=!visible;if(visible)count++;
+   }
+   for(const button of filters)button.setAttribute('aria-pressed',String(button.dataset.articleFilter===category));
+   status.textContent=query||category!=='all'?`找到 ${count} 篇文章（共 ${cards.length} 篇）`:`共 ${cards.length} 篇文章`;
+   empty.hidden=count!==0;
+ }
+ input.addEventListener('input',update);
+ form.addEventListener('submit',event=>{event.preventDefault();update();});
+ filters.forEach(button=>button.addEventListener('click',()=>{category=button.dataset.articleFilter;update();}));
+ document.getElementById('article-search-reset')?.addEventListener('click',()=>{input.value='';category='all';update();input.focus();});
+ update();
+})();

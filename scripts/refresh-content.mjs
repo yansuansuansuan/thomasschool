@@ -1,0 +1,54 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const base='https://yansuansuansuan.github.io/thomasschool/';
+const brand='托马斯学习馆（王家湾人信汇校区）';
+const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Hong_Kong',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const read=f=>fs.readFileSync(path.join(root,f),'utf8');
+const write=(f,s)=>{fs.mkdirSync(path.dirname(path.join(root,f)),{recursive:true});fs.writeFileSync(path.join(root,f),s,'utf8');};
+const readJson=(f,fallback)=>fs.existsSync(path.join(root,f))?JSON.parse(read(f)):fallback;
+let index=read('articles.html');
+const oldOrder=[...index.matchAll(/class="campus-article-card"[^>]*href="([^"]+)"/g)].map(m=>m[1]);
+function subjects(a){
+ if(/师资|配师/.test(a.category))return ['preschool','english'];
+ if(/英语/.test(a.category))return ['english'];
+ if(/幼小|课表|习惯/.test(a.category))return ['preschool'];
+ return ['campus'];
+}
+const articles=fs.readdirSync(path.join(root,'articles')).filter(f=>f.endsWith('.html')).map(f=>{
+ const file='articles/'+f,html=read(file);
+ const blocks=[...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m=>{const j=JSON.parse(m[1]);return j['@graph']||[j];});
+ const data=blocks.find(j=>j['@type']==='Article');
+ if(!data)throw Error('Article metadata missing: '+file);
+ if(!data.headline||!data.datePublished||!data.description)throw Error('Incomplete article metadata: '+file);
+ const article={file,url:base+file,title:data.headline,description:data.description,category:data.articleSection||'校区资料',tags:data.keywords?.split(/[，,]/).map(s=>s.trim()).filter(Boolean)||[],publishedAt:data.datePublished,updatedAt:data.dateModified||data.datePublished};
+ article.subjects=subjects(article);
+ return article;
+}).sort((a,b)=>b.publishedAt.localeCompare(a.publishedAt)||(oldOrder.indexOf(a.file)===-1?999:oldOrder.indexOf(a.file))-(oldOrder.indexOf(b.file)===-1?999:oldOrder.indexOf(b.file))||a.file.localeCompare(b.file));
+const cards=articles.map(a=>`<a class="campus-article-card" href="${a.file}" data-subjects="${a.subjects.join(' ')}" data-keywords="${esc(a.tags.join(' '))}"><span class="article-category">${esc(a.category)}</span><h3>${esc(a.title)}</h3><p>${esc(a.description)}</p><span class="article-card-bottom"><time datetime="${esc(a.updatedAt)}">${esc(a.updatedAt.slice(0,10).replaceAll('-','.'))}</time><span>阅读全文 →</span></span></a>`).join('\n');
+if(!index.includes('<!-- articles:start -->')||!index.includes('<!-- articles:end -->'))throw Error('Article index markers missing');
+index=index.replace(/<!-- articles:start -->[\s\S]*?<!-- articles:end -->/,'<!-- articles:start -->\n'+cards+'\n<!-- articles:end -->');
+const lastUpdated=articles.map(a=>a.updatedAt.slice(0,10)).sort().at(-1)||today;
+index=index.replace(/<span>\d+篇 · [^<]*更新<\/span>/,`<span>${articles.length}篇 · ${lastUpdated}更新</span>`).replace(/(<p id="article-result-count"[^>]*>)[\s\S]*?(<\/p>)/,`$1共${articles.length}篇文章$2`);
+index=index.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/,(_,s)=>{
+ const data=JSON.parse(s);const page=data['@graph'].find(n=>n['@type']==='CollectionPage');
+ if(page)page.mainEntity={'@type':'ItemList',numberOfItems:articles.length,itemListElement:articles.map((a,i)=>({'@type':'ListItem',position:i+1,name:a.title,url:a.url}))};
+ return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g,'\\u003c')}</script>`;
+});
+write('articles.html',index);
+write('content/articles.json',JSON.stringify({site:base,articles},null,2)+'\n');
+const rootFiles=fs.readdirSync(root).filter(f=>f.endsWith('.html')&&f!=='404.html');
+const previousPages=readJson('content/site-pages.json',{pages:[]});
+const sitePages=[...rootFiles,...articles.map(a=>a.file)].map(file=>({file,title:read(file).match(/<title>([\s\S]*?)<\/title>/)?.[1],updatedAt:articles.find(a=>a.file===file)?.updatedAt.slice(0,10)||previousPages.pages.find(p=>p.file===file)?.updatedAt||today}));
+write('content/site-pages.json',JSON.stringify({site:base,pages:sitePages},null,2)+'\n');
+const pageUrl=f=>base+(f==='index.html'?'':f);
+write('sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitePages.map(p=>`  <url><loc>${esc(pageUrl(p.file))}</loc><lastmod>${p.updatedAt}</lastmod></url>`).join('\n')}\n</urlset>\n`);
+const previousFeed=fs.existsSync(path.join(root,'feed.xml'))?read('feed.xml'):'';
+const pubDates=new Map([...previousFeed.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(m=>[m[1].match(/<guid[^>]*>([^<]+)<\/guid>/)?.[1],m[1].match(/<pubDate>([^<]+)<\/pubDate>/)?.[1]]));
+write('feed.xml',`<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>${brand}校区文章</title><link>${base}articles.html</link><description>校区课程、作息、英语与生活配套资料</description><language>zh-CN</language><atom:link href="${base}feed.xml" rel="self" type="application/rss+xml"/>${articles.map(a=>`<item><title>${esc(a.title)}</title><link>${a.url}</link><guid isPermaLink="true">${a.url}</guid><description>${esc(a.description)}</description><pubDate>${pubDates.get(a.url)||new Date().toUTCString()}</pubDate><category>${esc(a.category)}</category></item>`).join('')}</channel></rss>\n`);
+const siteMap=read('site-map.html').replace(/<ul class="site-directory" data-article-directory>[\s\S]*?<\/ul>/,`<ul class="site-directory" data-article-directory>${articles.map(a=>`<li><a href="${a.file}">${esc(a.title)} →</a></li>`).join('')}</ul>`);
+write('site-map.html',siteMap);
+write('llms.txt',`# ${brand}\n\n> 校区自有网站。经营主体：武汉市汉阳区壹周学培训学校有限公司。以下内容为校区提供的课程与生活资料。\n\n## 校区信息\n\n- 地址：武汉市汉阳区龙兴西街人信汇F地块二期7幢1—2层6商号；入口：人信汇二期一号门旁。\n- 幼小衔接：5—6岁、中大班阶段，平均每班约10名孩子，班主任统筹、分科教师参与教学。\n- 英语：平均每班8—10名孩子，POWER UP搭配瑞格自然拼读。\n- 幼小衔接咨询：17771744867；英语咨询：18672315287。\n- 具体班型、任课、课表及资源安排以当期沟通为准。\n\n## 校区与课程页面\n\n${rootFiles.map(f=>`- [${sitePages.find(p=>p.file===f).title}](${pageUrl(f)})`).join('\n')}\n\n## 校区文章\n\n${articles.map(a=>`- [${a.title}](${a.url}): ${a.description}`).join('\n')}\n\n## 目录与订阅\n\n- [站点地图](${base}sitemap.xml)\n- [文章RSS](${base}feed.xml)\n`);
+console.log(JSON.stringify({articles:articles.length,indexedHtmlPages:sitePages.length,date:today}));

@@ -36,3 +36,13 @@ https://yansuansuansuan.github.io/thomasschool/
 - 内容依据校区提供的原始课程说明、课表和教师介绍资料；不包含第三方测评或效果保证。
 - 班额与地址按最新校区资料更新；英语总年龄范围存在资料差异，不使用固定总年龄覆盖表述。
 - 图片、原有页面与GitHub Pages部署方式保留。
+
+## 全站完善与日常维护
+
+- about.html：认识校区；contact.html：到校地址与地图搜索；faq.html：14项课程与生活问题；site-map.html：家长可阅读的网站目录；404.html：不存在页面的返回入口。
+- 课程页先展示本校区已确认资料，再列家长择校观察清单；教师卡有可阅读文字。
+- 文章目录支持搜索、主题筛选和无结果提示，正文与全部文章链接仍为静态HTML。
+- 修改或新增articles/*.html的文章和Article结构化数据后，在仓库根目录运行 `node scripts/refresh-content.mjs`。它同步文章目录、content/articles.json、RSS、站点地图和llms链接。
+- 修改旧文保留datePublished，仅实质更新时调整dateModified；不要仅为刷新日期重复发布同一文章。
+- 上线先验证内链、锚点、手机端、电话与地址，再推送当前main的后继提交，核对Pages部署和公开页面。
+- 网站没有新增收集家长或儿童资料的在线表单；地图为用户主动点击的新窗口链接。
