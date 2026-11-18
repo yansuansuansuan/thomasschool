@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+
 Sitemap: https://yansuansuansuan.github.io/thomasschool/sitemap.xml
