@@ -48,3 +48,10 @@ https://yansuansuansuan.github.io/thomasschool/
 - 修改旧文保留datePublished，仅实质更新时调整dateModified；不要仅为刷新日期重复发布同一文章。
 - 上线先验证内链、锚点、手机端、电话与地址，再推送当前main的后继提交，核对Pages部署和公开页面。
 - 网站没有新增收集家长或儿童资料的在线表单；地图为用户主动点击的新窗口链接。
+
+## 搜索收录与内容更新检查
+
+- 站长平台验证、抓取诊断、收录跟踪见 [SEARCH_INDEXING.md](SEARCH_INDEXING.md)。
+- 新文章发布后运行 `node scripts/refresh-content.mjs`，自动更新 `baidu-urls.txt`、`sitemap.xml`、RSS 和文章索引。
+- 提交前运行 `node scripts/check-site.mjs`，检查正式域名、SEO 标签、JSON-LD 与站内链接；GitHub Actions 也会自动检查。
+- `baidu-urls.txt` 仅包含站点公开链接，不含任何私密 API token。
