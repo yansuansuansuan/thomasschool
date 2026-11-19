@@ -11,11 +11,13 @@
 - `assets/`：LOGO、图标、CSS 和 JavaScript
 - `robots.txt` / `sitemap.xml`：供搜索引擎发现网页
 
-## 免费发布
+## 正式域名与发布
 
-本仓库可通过 GitHub Pages 免费发布。在 **Settings → Pages** 中将 Source 设为 **Deploy from a branch**，分支选 **main**、目录选 **/(root)**。
+正式域名：https://thomasweek.top/ 。网站源码托管在 GitHub，当前通过腾讯云 EdgeOne Makers 与 main 分支同步部署。SEO 规范网址、网站地图、RSS 和结构化数据使用正式域名；定期确认中国大陆普通网络访问及百度抓取效果。
 
-发布后的地址（实际状态需在 Pages 设置中核实）：
+本仓库也可通过 GitHub Pages 免费发布。在 **Settings → Pages** 中将 Source 设为 **Deploy from a branch**，分支选 **main**、目录选 **/(root)**。
+
+GitHub Pages 原始项目地址（若继续启用，仅作为备用入口，不应设为 canonical）：
 
 https://yansuansuansuan.github.io/thomasschool/
 
