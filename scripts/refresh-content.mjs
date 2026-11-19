@@ -45,6 +45,8 @@ const sitePages=[...rootFiles,...articles.map(a=>a.file)].map(file=>({file,title
 write('content/site-pages.json',JSON.stringify({site:base,pages:sitePages},null,2)+'\n');
 const pageUrl=f=>base+(f==='index.html'?'':f);
 write('sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitePages.map(p=>`  <url><loc>${esc(pageUrl(p.file))}</loc><lastmod>${p.updatedAt}</lastmod></url>`).join('\n')}\n</urlset>\n`);
+// Copy/paste-ready URL list for Baidu Search Resource Platform ordinary submission.
+write('baidu-urls.txt',sitePages.map(p=>pageUrl(p.file)).join('\n')+'\n');
 const previousFeed=fs.existsSync(path.join(root,'feed.xml'))?read('feed.xml'):'';
 const pubDates=new Map([...previousFeed.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(m=>[m[1].match(/<guid[^>]*>([^<]+)<\/guid>/)?.[1],m[1].match(/<pubDate>([^<]+)<\/pubDate>/)?.[1]]));
 write('feed.xml',`<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>${brand}校区文章</title><link>${base}articles.html</link><description>校区课程、作息、英语与生活配套资料</description><language>zh-CN</language><atom:link href="${base}feed.xml" rel="self" type="application/rss+xml"/>${articles.map(a=>`<item><title>${esc(a.title)}</title><link>${a.url}</link><guid isPermaLink="true">${a.url}</guid><description>${esc(a.description)}</description><pubDate>${pubDates.get(a.url)||new Date().toUTCString()}</pubDate><category>${esc(a.category)}</category></item>`).join('')}</channel></rss>\n`);
