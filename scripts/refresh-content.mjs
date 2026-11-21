@@ -10,7 +10,8 @@ const read=f=>fs.readFileSync(path.join(root,f),'utf8');
 const write=(f,s)=>{fs.mkdirSync(path.dirname(path.join(root,f)),{recursive:true});fs.writeFileSync(path.join(root,f),s,'utf8');};
 const readJson=(f,fallback)=>fs.existsSync(path.join(root,f))?JSON.parse(read(f)):fallback;
 let index=read('articles.html');
-const oldOrder=[...index.matchAll(/class="campus-article-card"[^>]*href="([^"]+)"/g)].map(m=>m[1]);
+const priorArticles=readJson('content/articles.json',{articles:[]}).articles;
+const oldOrder=[...index.matchAll(/class="(?:campus-article-card|acard reveal)"[^>]*href="([^"]+)"/g)].map(m=>m[1]);
 function subjects(a){
  if(/师资|配师/.test(a.category))return ['preschool','english'];
  if(/英语/.test(a.category))return ['english'];
@@ -23,17 +24,17 @@ const articles=fs.readdirSync(path.join(root,'articles')).filter(f=>f.endsWith('
  const data=blocks.find(j=>j['@type']==='Article');
  if(!data)throw Error('Article metadata missing: '+file);
  if(!data.headline||!data.datePublished||!data.description)throw Error('Incomplete article metadata: '+file);
- const article={file,url:base+file,title:data.headline,description:data.description,category:data.articleSection||'校区资料',tags:data.keywords?.split(/[，,]/).map(s=>s.trim()).filter(Boolean)||[],publishedAt:data.datePublished,updatedAt:data.dateModified||data.datePublished};
+ const article={file,url:base+file,title:data.headline,description:data.description,category:data.articleSection||priorArticles.find(a=>a.file===file)?.category||'校区资料',tags:data.keywords?.split(/[，,]/).map(s=>s.trim()).filter(Boolean)||priorArticles.find(a=>a.file===file)?.tags||[],publishedAt:data.datePublished,updatedAt:data.dateModified||data.datePublished};
  article.subjects=subjects(article);
  return article;
 }).sort((a,b)=>b.publishedAt.localeCompare(a.publishedAt)||(oldOrder.indexOf(a.file)===-1?999:oldOrder.indexOf(a.file))-(oldOrder.indexOf(b.file)===-1?999:oldOrder.indexOf(b.file))||a.file.localeCompare(b.file));
-const cards=articles.map(a=>`<a class="campus-article-card" href="${a.file}" data-subjects="${a.subjects.join(' ')}" data-keywords="${esc(a.tags.join(' '))}"><span class="article-category">${esc(a.category)}</span><h3>${esc(a.title)}</h3><p>${esc(a.description)}</p><span class="article-card-bottom"><time datetime="${esc(a.updatedAt)}">${esc(a.updatedAt.slice(0,10).replaceAll('-','.'))}</time><span>阅读全文 →</span></span></a>`).join('\n');
+const cards=articles.map(a=>`<a class="acard reveal" href="${a.file}" data-subjects="${a.subjects.join(' ')}" data-keywords="${esc(a.tags.join(' '))}"><span class="a-cat">${esc(a.category)}</span><h3>${esc(a.title)}</h3><p>${esc(a.description)}</p><span class="a-foot"><time datetime="${esc(a.updatedAt)}">${esc(a.updatedAt.slice(0,10).replaceAll('-','.'))}</time><b>阅读全文 →</b></span></a>`).join('\n');
 if(!index.includes('<!-- articles:start -->')||!index.includes('<!-- articles:end -->'))throw Error('Article index markers missing');
 index=index.replace(/<!-- articles:start -->[\s\S]*?<!-- articles:end -->/,'<!-- articles:start -->\n'+cards+'\n<!-- articles:end -->');
 const lastUpdated=articles.map(a=>a.updatedAt.slice(0,10)).sort().at(-1)||today;
 index=index.replace(/<span>\d+篇 · [^<]*更新<\/span>/,`<span>${articles.length}篇 · ${lastUpdated}更新</span>`).replace(/(<p id="article-result-count"[^>]*>)[\s\S]*?(<\/p>)/,`$1共${articles.length}篇文章$2`);
 index=index.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/,(_,s)=>{
- const data=JSON.parse(s);const page=data['@graph'].find(n=>n['@type']==='CollectionPage');
+ const data=JSON.parse(s);const page=(data['@graph']||[data]).find(n=>n['@type']==='CollectionPage');
  if(page)page.mainEntity={'@type':'ItemList',numberOfItems:articles.length,itemListElement:articles.map((a,i)=>({'@type':'ListItem',position:i+1,name:a.title,url:a.url}))};
  return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g,'\\u003c')}</script>`;
 });
