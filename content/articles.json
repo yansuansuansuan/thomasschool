@@ -2,6 +2,186 @@
   "site": "https://thomasweek.top/",
   "articles": [
     {
+      "file": "articles/english-classroom-help.html",
+      "url": "https://thomasweek.top/articles/english-classroom-help.html",
+      "title": "王家湾英语课堂：托马斯怎样练习英文求助",
+      "description": "从请求重复、表达不明白到尝试解释，介绍英语课堂中的真实沟通与学习习惯。",
+      "category": "少儿英语",
+      "tags": [
+        "托马斯学习馆",
+        "王家湾英语",
+        "英语表达",
+        "课堂习惯"
+      ],
+      "publishedAt": "2026-11-22",
+      "updatedAt": "2026-11-22",
+      "subjects": [
+        "english"
+      ]
+    },
+    {
+      "file": "articles/english-nonfiction-reading.html",
+      "url": "https://thomasweek.top/articles/english-nonfiction-reading.html",
+      "title": "汉阳少儿英语阅读：托马斯怎样连接故事与科普",
+      "description": "从题材、图片支持、听读与输出任务，说明分级阅读中故事与非虚构材料的使用方向。",
+      "category": "少儿英语",
+      "tags": [
+        "托马斯学习馆",
+        "汉阳少儿英语",
+        "分级阅读",
+        "绘本阅读"
+      ],
+      "publishedAt": "2026-11-22",
+      "updatedAt": "2026-11-22",
+      "subjects": [
+        "english"
+      ]
+    },
+    {
+      "file": "articles/english-peer-listening.html",
+      "url": "https://thomasweek.top/articles/english-peer-listening.html",
+      "title": "托马斯英语小班：轮流倾听与同伴合作怎样练",
+      "description": "把听懂同伴、轮流回应、角色分工与合作任务放入英语课堂，介绍小班参与的具体方向。",
+      "category": "少儿英语",
+      "tags": [
+        "托马斯学习馆",
+        "王家湾英语",
+        "同伴合作",
+        "小班教学"
+      ],
+      "publishedAt": "2026-11-22",
+      "updatedAt": "2026-11-22",
+      "subjects": [
+        "english"
+      ]
+    },
+    {
+      "file": "articles/english-recasting-feedback.html",
+      "url": "https://thomasweek.top/articles/english-recasting-feedback.html",
+      "title": "托马斯少儿英语：说错以后怎样继续表达",
+      "description": "介绍重述式引导、等待时间与适度复习，连接表达意愿和语言准确度。",
+      "category": "少儿英语",
+      "tags": [
+        "托马斯学习馆",
+        "王家湾英语",
+        "英语启蒙",
+        "课堂反馈"
+      ],
+      "publishedAt": "2026-11-22",
+      "updatedAt": "2026-11-22",
+      "subjects": [
+        "english"
+      ]
+    },
+    {
+      "file": "articles/english-sentence-scaffolds.html",
+      "url": "https://thomasweek.top/articles/english-sentence-scaffolds.html",
+      "title": "王家湾托马斯英语：从短回应到说出想法和理由",
+      "description": "介绍句式支架、开放问题与任务调整，支持孩子逐步组织更完整的英语表达。",
+      "category": "少儿英语",
+      "tags": [
+        "托马斯学习馆",
+        "王家湾英语",
+        "口语表达",
+        "句式支架"
+      ],
+      "publishedAt": "2026-11-22",
+      "updatedAt": "2026-11-22",
+      "subjects": [
+        "english"
+      ]
+    },
+    {
+      "file": "articles/fine-motor-writing-readiness.html",
+      "url": "https://thomasweek.top/articles/fine-motor-writing-readiness.html",
+      "title": "托马斯幼小衔接：握笔运笔怎样结合精细动作",
+      "description": "围绕坐姿、手部动作、材料操作与适度运笔，说明校区书写准备的能力方向。",
+      "category": "幼小衔接",
+      "tags": [
+        "托马斯学习馆",
+        "王家湾幼小衔接",
+        "握笔运笔",
+        "精细动作"
+      ],
+      "publishedAt": "2026-11-22",
+      "updatedAt": "2026-11-22",
+      "subjects": [
+        "preschool"
+      ]
+    },
+    {
+      "file": "articles/morning-arrival-adaptation.html",
+      "url": "https://thomasweek.top/articles/morning-arrival-adaptation.html",
+      "title": "王家湾入学准备：托马斯怎样支持晨间入校适应",
+      "description": "把入校情绪、物品整理、表达需要与活动转换连接起来，介绍晨间适应的支持方向。",
+      "category": "习惯与成长",
+      "tags": [
+        "托马斯学习馆",
+        "王家湾幼小衔接",
+        "入校适应",
+        "情绪表达"
+      ],
+      "publishedAt": "2026-11-22",
+      "updatedAt": "2026-11-22",
+      "subjects": [
+        "preschool"
+      ]
+    },
+    {
+      "file": "articles/movement-turntaking-cooperation.html",
+      "url": "https://thomasweek.top/articles/movement-turntaking-cooperation.html",
+      "title": "托马斯幼小衔接：在运动里练轮流、规则与合作",
+      "description": "从活动规则、等待轮次、表达需要和结束整理，介绍运动与社会准备的联系。",
+      "category": "幼小衔接",
+      "tags": [
+        "托马斯学习馆",
+        "汉阳幼小衔接",
+        "户外活动",
+        "同伴合作"
+      ],
+      "publishedAt": "2026-11-22",
+      "updatedAt": "2026-11-22",
+      "subjects": [
+        "preschool"
+      ]
+    },
+    {
+      "file": "articles/picture-talk-and-retelling.html",
+      "url": "https://thomasweek.top/articles/picture-talk-and-retelling.html",
+      "title": "汉阳幼小衔接：托马斯从看图讲述练完整表达",
+      "description": "从发现画面、说清人物动作到组织先后顺序，介绍看图表达与口头复述的参与方法。",
+      "category": "幼小衔接",
+      "tags": [
+        "托马斯学习馆",
+        "汉阳幼小衔接",
+        "看图表达",
+        "阅读习惯"
+      ],
+      "publishedAt": "2026-11-22",
+      "updatedAt": "2026-11-22",
+      "subjects": [
+        "preschool"
+      ]
+    },
+    {
+      "file": "articles/timers-and-task-cards.html",
+      "url": "https://thomasweek.top/articles/timers-and-task-cards.html",
+      "title": "王家湾幼小衔接：托马斯怎样用任务卡练时间观念",
+      "description": "把计时器、任务卡、过程提示和完成检查连接起来，让时间观念落实到孩子能做的小任务。",
+      "category": "习惯与成长",
+      "tags": [
+        "托马斯学习馆",
+        "王家湾幼小衔接",
+        "时间观念",
+        "任务意识"
+      ],
+      "publishedAt": "2026-11-22",
+      "updatedAt": "2026-11-22",
+      "subjects": [
+        "preschool"
+      ]
+    },
+    {
       "file": "articles/full-day-life-questions.html",
       "url": "https://thomasweek.top/articles/full-day-life-questions.html",
       "title": "全日班午餐午休怎么安排？托马斯校区生活答疑",
