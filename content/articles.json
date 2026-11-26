@@ -2,6 +2,91 @@
   "site": "https://thomasweek.top/",
   "articles": [
     {
+      "file": "articles/arrival-transition-cue.html",
+      "url": "https://thomasweek.top/articles/arrival-transition-cue.html",
+      "title": "王家湾幼小衔接：离开游乐区前，怎样约定结束信号",
+      "description": "从一个可预见的收尾动作开始，练习结束喜欢的活动并进入下一个日常环节。",
+      "category": "幼小衔接",
+      "tags": [
+        "托马斯学习馆",
+        "王家湾人信汇校区",
+        "幼小衔接"
+      ],
+      "publishedAt": "2026-11-26",
+      "updatedAt": "2026-11-26",
+      "subjects": [
+        "preschool"
+      ]
+    },
+    {
+      "file": "articles/draw-a-route.html",
+      "url": "https://thomasweek.top/articles/draw-a-route.html",
+      "title": "汉阳入学准备：用一张桌面路线图练习方向表达",
+      "description": "用玩具和积木布置简短路线，观察孩子能否用参照物说清从哪里走、到哪里停。",
+      "category": "幼小衔接",
+      "tags": [
+        "托马斯学习馆",
+        "王家湾人信汇校区",
+        "幼小衔接"
+      ],
+      "publishedAt": "2026-11-26",
+      "updatedAt": "2026-11-26",
+      "subjects": [
+        "preschool"
+      ]
+    },
+    {
+      "file": "articles/english-cafe-clarification.html",
+      "url": "https://thomasweek.top/articles/english-cafe-clarification.html",
+      "title": "汉阳少儿英语情境练习：听漏一个词，怎样问清楚",
+      "description": "把礼貌追问放进家庭点单游戏，让孩子练习指出自己漏听的是哪一条信息。",
+      "category": "少儿英语",
+      "tags": [
+        "托马斯学习馆",
+        "王家湾人信汇校区",
+        "少儿英语"
+      ],
+      "publishedAt": "2026-11-26",
+      "updatedAt": "2026-11-26",
+      "subjects": [
+        "english"
+      ]
+    },
+    {
+      "file": "articles/english-picture-prediction.html",
+      "url": "https://thomasweek.top/articles/english-picture-prediction.html",
+      "title": "王家湾少儿英语绘本：翻页前怎样引导孩子猜下一步",
+      "description": "用封面和前一页的画面找线索，让孩子用动作、词语或短句说出下一页的猜想。",
+      "category": "少儿英语",
+      "tags": [
+        "托马斯学习馆",
+        "王家湾人信汇校区",
+        "少儿英语"
+      ],
+      "publishedAt": "2026-11-26",
+      "updatedAt": "2026-11-26",
+      "subjects": [
+        "english"
+      ]
+    },
+    {
+      "file": "articles/packing-from-picture-list.html",
+      "url": "https://thomasweek.top/articles/packing-from-picture-list.html",
+      "title": "王家湾幼小衔接：用三格图清单练习自己收书包",
+      "description": "把收书包拆成看图、找物和复查三个动作，帮助家长观察孩子在哪一步需要提示。",
+      "category": "幼小衔接",
+      "tags": [
+        "托马斯学习馆",
+        "王家湾人信汇校区",
+        "幼小衔接"
+      ],
+      "publishedAt": "2026-11-26",
+      "updatedAt": "2026-11-26",
+      "subjects": [
+        "preschool"
+      ]
+    },
+    {
       "file": "articles/book-care-return.html",
       "url": "https://thomasweek.top/articles/book-care-return.html",
       "title": "王家湾幼小衔接阅读习惯：借书、找页、归还怎么练",
